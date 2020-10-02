@@ -1,5 +1,6 @@
 require ('rspec')
 require ('word')
+require ('definition')
 
 describe '#Word' do
 
@@ -26,7 +27,7 @@ describe '#Word' do
   describe("#==") do
     it ("is the same word if it has the same attributes as another word") do
       word = Word.new('pear', nil)
-      word2 = Album.new('pear', nil)
+      word2 = Word.new('pear', nil)
       expect(word).to(eq(word2))
     end
   end
@@ -48,59 +49,58 @@ describe '#Word' do
       word.save()
       word2 = Word.new("apple", nil)
       word2.save()
-      expect(Word.find(album.id)).to(eq(album))
+      expect(Word.find(word.id)).to(eq(word))
     end
   end
 
   describe('#update') do
-    it("updates and album by id") do
-      album = Album.new("Giant Steps", nil)
-      album.save()
-      album.update("A Love Supreme")
-      expect(album.name).to(eq("A Love Supreme"))
+    it("updates a word by id") do
+      word = Word.new("Blueberry", nil)
+      word.save()
+      word.update("Durian")
+      expect(word.word_input).to(eq("Durian"))
     end
   end
 
   describe('#delete') do
-    it("deletes an album by id") do
-      album = Album.new("Giant Steps", nil)
-      album.save()
-      album2 = Album.new("Blue", nil)
-      album2.save()
-      album.delete()
-      expect(Album.all).to(eq([album2]))
-    end
-  end
-
-  describe('.search') do
-    it("finds album by name") do
-      album = Album.new("Giant Steps", nil)
-      album.save()
-      album2 = Album.new("Blue", nil)
-      album2.save()
-      expect(Album.search('Giant Steps')).to(eq(album))
+    it("deletes a word by id") do
+      word = Word.new("Blueberry", nil)
+      word.save()
+      word2 = Word.new("Apple", nil)
+      word2.save()
+      word.delete()
+      expect(Word.all).to(eq([word2]))
     end
   end
 
   describe('.sort') do
-    it("will sort @@albums by name") do
-      album = Album.new("Giant Steps", nil)
-      album.save()
-      album2 = Album.new("Blue", nil)
-      album2.save()
-      expect(Album.sort).to(eq([album2, album]))
+    it("will sort @@words by word input") do
+      word = Word.new("Blueberry", nil)
+      word.save()
+      word2 = Word.new("Apple", nil)
+      word2.save()
+      expect(Word.sort).to(eq([word2, word]))
     end
   end
 
-  describe('#songs') do
-    it("returns an album's songs") do
-      album = Album.new("Giant Steps", nil)
-      album.save()
-      song = Song.new("Naima", album.id, nil)
-      song.save()
-      song2 = Song.new("Cousin Mary", album.id, nil)
-      song2.save()
-      expect(album.songs).to(eq([song, song2]))
+  describe('#definitions') do
+    it("returns an word's definitions") do
+      word = Word.new("Blueberry", nil)
+      word.save()
+      definition = Definition.new("Fruit", word.id, nil)
+      definition.save()
+      definition2 = Definition.new("Edible", word.id, nil)
+      definition2.save()
+      expect(word.definitions).to(eq([definition, definition2]))
     end
   end
+
+  describe '#add_definition' do
+  it 'adds a definition to the word' do
+    word = Word.new({:word => "test"})
+    definition = Definition.new({:def => "test"})
+    word.add_definition(definition)
+    expect(word.definitions).to eq ([definition])
+  end
+ end
 end

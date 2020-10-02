@@ -1,6 +1,6 @@
 class Word
-  attr_reader :id, :word_input
-  attr_accessor :word_input
+  attr_reader :id, :word_input, :definitions
+  attr_accessor :word_input, :definitions
 
   @@words = {}
   @@total_rows = 0
@@ -8,6 +8,7 @@ class Word
   def initialize(word_input, id)
     @word_input = word_input
     @id = id || @@total_rows +=1
+    @definitions = []
   end
 
   def self.all
@@ -16,7 +17,7 @@ class Word
 
   def self.sort
     array_of_words = @@words.values
-    return array_of_words.sort_by {|obj| obj.name}
+    return array_of_words.sort_by {|obj| obj.word_input}
   end
 
   def self.all
@@ -51,5 +52,9 @@ class Word
 
   def definitions
     Definition.find_by_word(self.id)
+  end
+
+  def add_definition (definition)
+    @definitions.push(definition)
   end
 end
