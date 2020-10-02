@@ -10,6 +10,7 @@ This concept for this website is to enable children to write up a list they are 
 ## Setup/Installation Requirements
 * Locate a browser to load pages
 * Enter the following URL at the top of your computer browser to access this application which has been deployed to heroku. Git hub link to this page: https://git.heroku.com/pure-atoll-27432.git
+* To deploy from multiple machines, add the git remote for heroku manually via command $ heroku git:remote -a word_definer
 * To run the application on your personal terminal you can clone this project through the following link:
 https://github.com/oswen138/word-definer.git
 * Install gems via command gem install bundler 
