@@ -1,20 +1,20 @@
-<h1>All Sales Vinyl</h1>
+<h1>Word Definer</h1>
 
-<h3>Available Records</h3>
+<h3>Word List</h3>
 
-<% if @albums.any? %>
+<% if @words.any? %>
   <ul>
-    <% @albums.each do |album| %>
-       <li><a href="/albums/<%= album.id %>"><%= album.name %></a></li>
+    <% @words.each do |word| %>
+       <li><a href="/words/<%= word.id %>"><%= word.name %></a></li>
     <% end %>
   </ul>
 <% else %>
-  <p>There are currently no records to display.</p>
+  <p>There are currently no words and/or definitions to display.</p>
 <% end %>
 
-<a href="/albums/new">Add a new album</a>
+<a href="/words/new">Add a new word</a>
 
-<form action="/albums/search" method="post">
+<form action="/words/search" method="post">
   <div class="form-group">
     <label for="search">Search</label>
     <input id="search" name="search" class="form-control" type="text">
@@ -22,4 +22,3 @@
   <button type="submit" class="btn">Go!</button>
 </form>
 
-<a href="/albums/sold">Go to sold list</a><br>

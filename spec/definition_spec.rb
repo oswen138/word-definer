@@ -87,7 +87,7 @@ describe '#Definition' do
       definition.save()
       definition2 = Definition.new("Mood", word2.id , nil)
       definition2.save()
-      expect(Definition.find_by_word(word2.id)).to(eq([word2]))
+      expect(Definition.find_by_word(word2.id)).to(eq([definition2]))
     end
   end
 

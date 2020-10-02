@@ -5,7 +5,7 @@ class Definition
   @@definitions = {}
   @@total_rows = 0
 
-  def initialize(name, word_id, id)
+  def initialize(word_input, word_id, id)
     @word_input = word_input
     @word_id = word_id
     @id = id || @@total_rows += 1
@@ -27,7 +27,7 @@ class Definition
     @@definitions[id]
   end
 
-  def update(name, word_id)
+  def update(word_input, word_id)
     self.word_input = word_input
     self.word_id = word_id
     @@definitions[self.id] = Definition.new(self.word_input, self.word_id, self.id)

@@ -11,16 +11,12 @@ class Word
   end
 
   def self.all
-    @@songs.values
+    @@words.values()
   end
 
   def self.sort
     array_of_words = @@words.values
     return array_of_words.sort_by {|obj| obj.word_input}
-  end
-
-  def self.all
-    @@words.values()
   end
 
   def save
