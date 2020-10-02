@@ -1,5 +1,5 @@
 require ('rspec')
-require ('word')
+require ('word.rb')
 require ('definition')
 
 describe '#Word' do
@@ -94,13 +94,4 @@ describe '#Word' do
       expect(word.definitions).to(eq([definition, definition2]))
     end
   end
-
-  describe '#add_definition' do
-  it 'adds a definition to the word' do
-    word = Word.new({:word => "test"})
-    definition = Definition.new({:def => "test"})
-    word.add_definition(definition)
-    expect(word.definitions).to eq ([definition])
-  end
- end
 end
