@@ -5,7 +5,7 @@ class Word
   @@words = {}
   @@total_rows = 0
 
-  def initialize(word_input,  word_id, id)
+  def initialize(word_input, id)
     @word_input = word_input
     @id = id || @@total_rows +=1
   end
@@ -24,7 +24,11 @@ class Word
   end
 
   def save
-    @@words[self.id] = Word.new(self.word_input, self.word_id, self.id)
+    @@words[self.id] = Word.new(self.word_input, self.id)
+  end
+
+  def ==(word_to_compare)
+    self.word_input() == word_to_compare.word_input()
   end
 
   def self.clear
@@ -48,3 +52,4 @@ class Word
   def definitions
     Definition.find_by_word(self.id)
   end
+end
