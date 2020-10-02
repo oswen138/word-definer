@@ -84,10 +84,10 @@ describe '#Word' do
   end
 
   describe('#definitions') do
-    it("returns an word's definitions") do
+    it("returns a word's definitions") do
       word = Word.new("Blueberry", nil)
       word.save()
-      definition = Definition.new("Fruit", word.id, nil)
+      definition = Definition.new("Balloon", word.id, nil)
       definition.save()
       definition2 = Definition.new("Edible", word.id, nil)
       definition2.save()

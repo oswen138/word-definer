@@ -1,101 +1,101 @@
 require 'rspec'
-require 'song'
-require 'album'
+require 'definition'
+require 'word'
 require 'pry'
 
-describe '#Song' do
+describe '#Definition' do
 
   before(:each) do
-    Album.clear()
-    Song.clear()
-    @album = Album.new("Giant Steps", nil)
-    @album.save()
+    Word.clear()
+    Definition.clear()
+    @word = Word.new("Blueberry", nil)
+    @word.save()
   end
 
   describe('#==') do
-    it("is the same song if it has the same attributes as another song") do
-      song = Song.new("Naima", @album.id, nil)
-      song2 = Song.new("Naima", @album.id, nil)
-      expect(song).to(eq(song2))
+    it("is the same definition if it has the same attributes as another definition") do
+      definition = Definition.new("Nuance", @word.id, nil)
+      definition2 = Definition.new("Nuance", @word.id, nil)
+      expect(definition).to(eq(definition2))
     end
   end
 
   describe('.all') do
-    it("returns a list of all songs") do
-      song = Song.new("Giant Steps", @album.id, nil)
-      song.save()
-      song2 = Song.new("Naima", @album.id, nil)
-      song2.save()
-      expect(Song.all).to(eq([song, song2]))
+    it("returns a list of all definitions") do
+      definition = Definition.new("Blueberry", @word.id, nil)
+      definition.save()
+      definition2 = Definition.new("Blueberry", @word.id, nil)
+      definition2.save()
+      expect(Definition.all).to(eq([definition, definition2]))
     end
   end
 
   describe('.clear') do
-    it("clears all songs") do
-      song = Song.new("Giant Steps", @album.id, nil)
-      song.save()
-      song2 = Song.new("Naima", @album.id, nil)
-      song2.save()
-      Song.clear()
-      expect(Song.all).to(eq([]))
+    it("clears all definitions") do
+      definition = Definition.new("Blueberry", @word.id, nil)
+      definition.save()
+      definition2 = Definition.new("Balloon", @word.id, nil)
+      definition2.save()
+      Definition.clear()
+      expect(Definition.all).to(eq([]))
     end
   end
 
   describe('#save') do
-    it("saves a song") do
-      song = Song.new("Naima", @album.id, nil)
-      song.save()
-      expect(Song.all).to(eq([song]))
+    it("saves a definition") do
+      definition = Definition.new("Balloon", @word.id, nil)
+      definition.save()
+      expect(Definition.all).to(eq([definition]))
     end
   end
 
   describe('.find') do
-    it("finds a song by id") do
-      song = Song.new("Giant Steps", @album.id, nil)
-      song.save()
-      song2 = Song.new("Naima", @album.id, nil)
-      song2.save()
-      expect(Song.find(song.id)).to(eq(song))
+    it("finds a definition by id") do
+      definition = Definition.new("Blueberry", @word.id, nil)
+      definition.save()
+      definition2 = Definition.new("Balloon", @word.id, nil)
+      definition2.save()
+      expect(Definition.find(definition.id)).to(eq(definition))
     end
   end
 
   describe('#update') do
-    it("updates an song by id") do
-      song = Song.new("Naima", @album.id, nil)
-      song.save()
-      song.update("Mr. P.C.", @album.id)
-      expect(song.name).to(eq("Mr. P.C."))
+    it("updates a definition by id") do
+      definition = Definition.new("Balloon", @word.id, nil)
+      definition.save()
+      definition.update("round", @word.id)
+      expect(definition.word_input).to(eq("round"))
     end
   end
 
   describe('#delete') do
-    it("deletes an song by id") do
-      song = Song.new("Giant Steps", @album.id, nil)
-      song.save()
-      song2 = Song.new("Naima", @album.id, nil)
-      song2.save()
-      song.delete()
-      expect(Song.all).to(eq([song2]))
+    it("deletes a definition by id") do
+      definition = Definition.new("Blueberry", @word.id, nil)
+      definition.save()
+      definition2 = Definition.new("Balloon", @word.id, nil)
+      definition2.save()
+      definition.delete()
+      expect(Definition.all).to(eq([definition2]))
     end
   end
 
-  describe('.find_by_album') do
-    it("finds songs for an album") do
-      album2 = Album.new("Blue", nil)
-      album2.save
-      song = Song.new("Naima", @album.id, nil)
-      song.save()
-      song2 = Song.new("California", album2.id , nil)
-      song2.save()
-      expect(Song.find_by_album(album2.id)).to(eq([song2]))
+  describe('.find_by_word') do
+    it("finds definitions for a song") do
+      word2 = Word.new("Blue", nil)
+      word2.save
+      definition = Definition.new("Color", @word.id, nil)
+      definition.save()
+      definition2 = Definition.new("Mood", word2.id , nil)
+      definition2.save()
+      expect(Definition.find_by_word(word2.id)).to(eq([word2]))
     end
   end
 
-  describe('#album') do
-    it("finds the album a song belongs to") do
-      song = Song.new("Naima", @album.id, nil)
-      song.save()
-      expect(song.album()).to(eq(@album))
+  describe('#word') do
+    it("finds the word a definition belongs to") do
+      definition = Definition.new("Balloon", @word.id, nil)
+      definition.save()
+      expect(definition.word()).to(eq(@word))
     end
   end
 end
