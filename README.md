@@ -5,7 +5,7 @@
 #### _**By Ophelia Swen, October 2, 2020**_
 
 ## Description
-This concept for this website is to enable children to write up a list they are unfamiliar with and come up with their own definitions.
+The concept for this website is to enable children to write up a list they are unfamiliar with and come up with their own definitions.
 
 ## Setup/Installation Requirements
 * Locate a browser to load pages
