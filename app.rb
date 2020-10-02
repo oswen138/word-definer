@@ -30,15 +30,14 @@ get('/words/:id/edit') do
 end
 
 post('/words/search') do
-  name = params[:search]
+  word_input = params[:search]
   @result = Word.search(word_input)
   erb(:search)
 end
 
-
 post('/words') do
- input = params[:word_input]
- word = Word.new(input, nil)
+ name = params[:word_name]
+ word = Word.new(name, nil)
  word.save()
  @words = Word.sort()
  erb(:words)
@@ -68,7 +67,7 @@ end
 
 post('/words/:id/definitions') do
   @word = Word.find(params[:id].to_i())
-  definition = Definition.new(params[:definition_input], @word.id, nil)
+  definition = Definition.new(params[:definition_name], @word.id, nil)
   definition.save()
   erb(:word)
 end
@@ -77,7 +76,7 @@ end
 patch('/words/:id/definitions/:definition_id') do
   @word = Word.find(params[:id].to_i())
   definition = Definition.find(params[:definition_id].to_i())
-  definition.update(params[:input], @word.id)
+  definition.update(params[:name], @word.id)
   erb(:word)
 end
 
