@@ -1,41 +1,50 @@
 class Word
-  attr_reader :id, :name
-  attr_accessor :name
+  attr_reader :id, :word_input
+  attr_accessor :word_input
+
   @@words = {}
   @@total_rows = 0
 
-  def initialize(name, id)
-    @name = name
-    @id = id || @@total_rows += 1
+  def initialize(word_input,  word_id, id)
+    @word_input = word_input
+    @id = id || @@total_rows +=1
   end
 
   def self.all
-    @@albums.values()
+    @@songs.values
+  end
+
+  def self.sort
+    array_of_words = @@words.values
+    return array_of_words.sort_by {|obj| obj.name}
+  end
+
+  def self.all
+    @@words.values()
   end
 
   def save
-    @@albums[self.id] = Album.new(self.name, self.id)
-  end
-
-  def ==(album_to_compare)
-    self.name() == album_to_compare.name()
+    @@words[self.id] = Word.new(self.word_input, self.word_id, self.id)
   end
 
   def self.clear
-    @@albums = {}
+    @@words = {}
     @@total_rows = 0
   end
-
+ 
   def self.find(id)
-    @@albums[id]
+    @@words[id]
   end
 
-  def update(name)
-    self.name = name
-    @@albums[self.id] = Album.new(self.name, self.id)
+  def update(word_input)
+    self.word_input = word_input
+    @@words[self.id] = Word.new(self.word_input, self.id)
   end
 
-  def delete()
-    @@albums.delete(self.id)
+  def delete
+    @@words.delete(self.id)
   end
-end
+
+  def definitions
+    Definition.find_by_word(self.id)
+  end
