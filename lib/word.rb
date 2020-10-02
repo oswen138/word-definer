@@ -48,5 +48,10 @@ class Word
   def definitions
     Definition.find_by_word(self.id)
   end
+
+  def self.alphabetize
+    @@words.sort_by!(@word_input)
+  end
+
 end
 

@@ -92,7 +92,19 @@ describe '#Word' do
       definition.save()
       definition2 = Definition.new("Food", word.id, nil)
       definition2.save()
-      expect(word.definitions).to(eq([definition, definition2]))
+      expect(Word.definitions).to(eq([definition, definition2]))
+    end
+  end
+
+  describe('.alphabetize') do
+    it("method to sort the words in alphabetical order") do
+      word = Word.new("Apple", nil)
+      word.save()
+      word2 = Word.new("Bear", word.id, nil)
+      word2.save()
+      word3 = Definition.new("Cat", word.id, nil)
+      word3.save()
+      expect(Word.alphabetize).to(eq([word, word3, word2]))
     end
   end
 end
